@@ -39,6 +39,7 @@ public class Player : Area2D
             anim.FlipH = false;
             anim.FlipV = (velocity.y > 0);
         }
+        anim.Play();
     }
     public override void _Process(float delta)
     {
@@ -68,7 +69,6 @@ public class Player : Area2D
             //catch one PressAction per frame
             this.Animate(animation, velocity);
             velocity = velocity * this.speed;
-            animation.Play();
         }
         else
         {
