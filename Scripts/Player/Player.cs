@@ -16,13 +16,19 @@ public class Player : Area2D
     {
         Hide();
         EmitSignal("Hit");
-        GetNode<CollisionObject2D>("CollisionShape2D").SetDeferred("disabled", true);
+        GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
     }
 
     public override void _Ready()
     {
         Hide(); // Hide player at the start 
         this._screenSize = GetViewport().Size;
+    }
+
+    public void Start(Vector2 pos)
+    {
+        Position = pos;
+        Show();
     }
 
     public void Animate(AnimatedSprite anim, Vector2 velocity)
