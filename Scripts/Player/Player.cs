@@ -6,10 +6,22 @@ public class Player : Area2D
     [Export]
     public int speed = 500; // Player speed
 
+    [Signal]
+    public delegate void Hit();
+
     private Vector2 _screenSize;//Size if window
+
+    //Signals
+    public void _on_Player_body_entered(RigidBody2D enemie)
+    {
+        Hide();
+        EmitSignal("Hit");
+        GetNode<CollisionObject2D>("CollisionShape2D").SetDeferred("disabled", true);
+    }
 
     public override void _Ready()
     {
+        Hide(); // Hide player at the start 
         this._screenSize = GetViewport().Size;
     }
 
