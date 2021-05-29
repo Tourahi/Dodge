@@ -38,16 +38,16 @@ public class Main : Node
 
     public void OnStartTimerTimeout()
     {
+        Player player = GetNode<Player>("Player");
+        Position2D startPos = GetNode<Position2D>("StartPosition");
         GetNode<Timer>("MobTimer").Start();
         GetNode<Timer>("ScoreTimer").Start();
+        player.Start(startPos.Position);
     }
 
     public void NewGame()
     {
         this._score = 0;
-        Player player = GetNode<Player>("Player");
-        Position2D startPos = GetNode<Position2D>("StartPosition");
-        player.Start(startPos.Position);
         GetNode<Timer>("StartTimer").Start();
     }
 
