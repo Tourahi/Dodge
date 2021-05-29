@@ -20,7 +20,7 @@ public class HUD : CanvasLayer
         Timer messageTimer = GetNode<Timer>("MessageTimer");
         await ToSignal(messageTimer,"timeout");
         Label message = GetNode<Label>("Message");
-        message.Text = "Dodge !!";
+        message.Text = "Dodge";
         message.Show();
         await ToSignal(GetTree().CreateTimer(1), "timeout");
         GetNode<Button>("StartButton").Show();
@@ -46,7 +46,7 @@ public class HUD : CanvasLayer
     //Signal
     public void OnMessageTimerTimeout()
     {
-        GetNode<Button>("StartButton").Hide();
+        GetNode<Label>("Message").Hide();
     }
 
 //  public override void _Process(float delta)

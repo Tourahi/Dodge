@@ -15,6 +15,8 @@ public class Main : Node
     {
         GetNode<Timer>("MobTimer").Stop();
         GetNode<Timer>("ScoreTimer").Stop();
+        GetNode<HUD>("HUD").ShowGameOver();
+        GetTree().CallGroup("mobs", "queue_free");
     }
 
     public void OnMobTimerTimeout()
@@ -34,6 +36,7 @@ public class Main : Node
     public void OnScoreTimerTimeout()
     {
         _score++;
+        GetNode<HUD>("HUD").ScoreUpdate(_score);
     }
 
     public void OnStartTimerTimeout()
@@ -48,12 +51,15 @@ public class Main : Node
     public void NewGame()
     {
         this._score = 0;
+        HUD hud = GetNode<HUD>("HUD");
+        hud.ScoreUpdate(_score);
+        hud.ShowMessage("Get Ready!!"); 
         GetNode<Timer>("StartTimer").Start();
     }
 
     public override void _Ready()
     {
-        NewGame();
+        //NewGame();
     }
 
     public float RandRange(float min,float max)
